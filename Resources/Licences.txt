@@ -1,0 +1,2 @@
+wood_pattern.png pattern is downloaded from www.subtlepatterns.com
+texture2.png is downloaded form www.patterncooler.com
