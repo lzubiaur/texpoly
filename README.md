@@ -1,7 +1,7 @@
 Texture polygon (texpoly)
 =========================
 
-This is a cocos2d-x project part of a short turorial on texture and polygon triangulation with cocos2d-x and box2d. The tutorial is available at http://www.pix2d.com/
+Texpoly is a cocos2d-x project part of a short turorial on texture and polygon triangulation with cocos2d-x and box2d. The tutorial is available at http://www.pix2d.com/. A video capture is also available  (https://www.youtube.com/watch?v=hmXwtyvJk_c)
 
 ## Description
 
