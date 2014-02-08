@@ -252,6 +252,9 @@
 		F58E86C7189E829600D39DC0 /* sweep_context.cc in Sources */ = {isa = PBXBuildFile; fileRef = F58E86C0189E829600D39DC0 /* sweep_context.cc */; };
 		F58E86CA189E91DD00D39DC0 /* texpoly.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F58E86C8189E91DD00D39DC0 /* texpoly.cpp */; };
 		F5A344FA18A27CB500754925 /* pattern.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A344F918A27CB500754925 /* pattern.png */; };
+		F5A3450118A54B4200754925 /* B2DebugDrawLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5A344FC18A54B4100754925 /* B2DebugDrawLayer.cpp */; };
+		F5A3450218A54B4400754925 /* GLES-Render.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5A344FE18A54B4100754925 /* GLES-Render.cpp */; };
+		F5A3450318A54B4400754925 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F5A3450018A54B4100754925 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -759,6 +762,11 @@
 		F58E86C8189E91DD00D39DC0 /* texpoly.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = texpoly.cpp; path = ../Classes/texpoly.cpp; sourceTree = "<group>"; };
 		F58E86C9189E91DD00D39DC0 /* texpoly.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = texpoly.h; path = ../Classes/texpoly.h; sourceTree = "<group>"; };
 		F5A344F918A27CB500754925 /* pattern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pattern.png; sourceTree = "<group>"; };
+		F5A344FC18A54B4100754925 /* B2DebugDrawLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = B2DebugDrawLayer.cpp; sourceTree = "<group>"; };
+		F5A344FD18A54B4100754925 /* B2DebugDrawLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B2DebugDrawLayer.h; sourceTree = "<group>"; };
+		F5A344FE18A54B4100754925 /* GLES-Render.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "GLES-Render.cpp"; sourceTree = "<group>"; };
+		F5A344FF18A54B4100754925 /* GLES-Render.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GLES-Render.h"; sourceTree = "<group>"; };
+		F5A3450018A54B4100754925 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1723,6 +1731,7 @@
 		F58E86AF189E829600D39DC0 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				F5A344FB18A54B4100754925 /* B2DebugDraw */,
 				F58E86B0189E829600D39DC0 /* clipper */,
 				F58E86B3189E829600D39DC0 /* poly2tri */,
 			);
@@ -1772,6 +1781,18 @@
 				F58E86C1189E829600D39DC0 /* sweep_context.h */,
 			);
 			path = sweep;
+			sourceTree = "<group>";
+		};
+		F5A344FB18A54B4100754925 /* B2DebugDraw */ = {
+			isa = PBXGroup;
+			children = (
+				F5A344FC18A54B4100754925 /* B2DebugDrawLayer.cpp */,
+				F5A344FD18A54B4100754925 /* B2DebugDrawLayer.h */,
+				F5A344FE18A54B4100754925 /* GLES-Render.cpp */,
+				F5A344FF18A54B4100754925 /* GLES-Render.h */,
+				F5A3450018A54B4100754925 /* README.md */,
+			);
+			path = B2DebugDraw;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1856,6 +1877,7 @@
 				379BBAAF17F03FDE00829B88 /* json_internalarray.inl in Resources */,
 				379BBAB017F03FDE00829B88 /* json_internalmap.inl in Resources */,
 				379BBAB317F03FDE00829B88 /* json_valueiterator.inl in Resources */,
+				F5A3450318A54B4400754925 /* README.md in Resources */,
 				379BBAB517F03FDE00829B88 /* sconscript in Resources */,
 				F53A0DD3189EB23D005D7189 /* wood_pattern.png in Resources */,
 			);
@@ -1934,6 +1956,7 @@
 				15C157E8168315B300D239F2 /* cpBB.c in Sources */,
 				15C157E9168315B300D239F2 /* cpBBTree.c in Sources */,
 				15C157EA168315B300D239F2 /* cpBody.c in Sources */,
+				F5A3450218A54B4400754925 /* GLES-Render.cpp in Sources */,
 				F58E86C4189E829600D39DC0 /* advancing_front.cc in Sources */,
 				15C157EB168315B300D239F2 /* cpCollision.c in Sources */,
 				15C157EC168315B300D239F2 /* cpHashSet.c in Sources */,
@@ -2011,6 +2034,7 @@
 				1A40E75E1727BFC6006D4861 /* Atlas.cpp in Sources */,
 				1A40E75F1727BFC6006D4861 /* AtlasAttachmentLoader.cpp in Sources */,
 				1A40E7601727BFC6006D4861 /* Attachment.cpp in Sources */,
+				F5A3450118A54B4200754925 /* B2DebugDrawLayer.cpp in Sources */,
 				ED05903918322790006C18FA /* UILayout.cpp in Sources */,
 				1A40E7611727BFC6006D4861 /* AttachmentLoader.cpp in Sources */,
 				1A40E7621727BFC6006D4861 /* Bone.cpp in Sources */,
