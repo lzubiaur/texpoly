@@ -74,6 +74,10 @@ bool TexPoly::init(const CCPointVector &points, const CCPointVector &hole, const
     for (const CCPoint& p : points)
         polyline.push_back(new p2t::Point(p.x, p.y));
 
+    std::vector<p2t::Point*> holePolyline;
+    for (const CCPoint& p : hole)
+        holePolyline.push_back(new p2t::Point(p.x, p.y));
+
     /**
      * STEP 3: Create CDT and add primary polyline
      * NOTE: polyline must be a simple polygon. The polyline's points
@@ -81,18 +85,12 @@ bool TexPoly::init(const CCPointVector &points, const CCPointVector &hole, const
      */
     p2t::CDT cdt(polyline);
 
-    /**
-     * STEP 4: Add hole to the polygon
-     */
-    if (hole.size()) {
-        std::vector<p2t::Point*> holePoly;
-        for (const CCPoint& p : hole)
-            holePoly.push_back(new p2t::Point(p.x, p.y));
-        cdt.AddHole(holePoly);
-    }
+    /// Add the hole
+    if (holePolyline.size())
+        cdt.AddHole(holePolyline);
 
     /**
-     * STEP 5: Triangulate!
+     * STEP 4: Triangulate!
      */
     cdt.Triangulate();
 
@@ -100,7 +98,7 @@ bool TexPoly::init(const CCPointVector &points, const CCPointVector &hole, const
     triangles = cdt.GetTriangles();
 
     /**
-     * STEP 6: create the Box2D body
+     * STEP 5: create the Box2D body
      */
     b2BodyDef bd;
     bd.type = b2_dynamicBody;
@@ -109,7 +107,7 @@ bool TexPoly::init(const CCPointVector &points, const CCPointVector &hole, const
     b2Body *body = world->CreateBody(&bd);
 
     /**
-     * STEP 7: Create the fixtures
+     * STEP 6: Create the fixtures
      */
     /// The box2d polygon shape
     b2PolygonShape shape;
@@ -141,7 +139,7 @@ bool TexPoly::init(const CCPointVector &points, const CCPointVector &hole, const
     }
 
     /**
-     * STEP 8: Configure the shader program
+     * STEP 7: Configure the shader program
      */
     /// Enable texture repeat
     ccTexParams params = {GL_LINEAR, GL_LINEAR, GL_REPEAT, GL_REPEAT};
@@ -154,9 +152,10 @@ bool TexPoly::init(const CCPointVector &points, const CCPointVector &hole, const
     setShaderProgram(program);
 
     /**
-     * STEP 9: cleanup
+     * STEP 8: cleanup
      */
     freeContainer(polyline);
+    freeContainer(holePolyline);
 
     return true; /// Success
 }
