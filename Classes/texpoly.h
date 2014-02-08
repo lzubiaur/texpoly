@@ -41,7 +41,8 @@ public:
      * @param world     Pointer to the box2d physic world
      */
     static TexPoly *create(const CCPointVector &points, const std::string &filename, b2World *world);
-    virtual bool init(const CCPointVector &points, const std::string &filename, b2World *world);
+    static TexPoly *create(const CCPointVector &points, const CCPointVector &hole , const std::string &filename, b2World *world);
+    virtual bool init(const CCPointVector &points, const CCPointVector &hole, const std::string &filename, b2World *world);
     virtual void draw();
 
     void setColor(const ccColor4F &color);

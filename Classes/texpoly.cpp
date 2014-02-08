@@ -38,8 +38,14 @@ TexPoly::~TexPoly()
 
 TexPoly *TexPoly::create(const CCPointVector &points, const std::string &filename, b2World *world)
 {
+    CCPointVector empty;
+    return create(points, empty, filename, world);
+}
+
+TexPoly *TexPoly::create(const CCPointVector &points, const CCPointVector &hole, const std::string &filename, b2World *world)
+{
     TexPoly *ptr = new TexPoly();
-    if (ptr && ptr->init(points, filename, world)) {
+    if (ptr && ptr->init(points, hole, filename, world)) {
         ptr->autorelease();
         return ptr;
     }
@@ -47,7 +53,7 @@ TexPoly *TexPoly::create(const CCPointVector &points, const std::string &filenam
     return nullptr;
 }
 
-bool TexPoly::init(const CCPointVector &points, const std::string &filename, b2World *world)
+bool TexPoly::init(const CCPointVector &points, const CCPointVector &hole, const std::string &filename, b2World *world)
 {
     if (filename.length() == 0) {
         CCLOGERROR("ERROR: Invalid texture filename (empty string)");
@@ -76,7 +82,17 @@ bool TexPoly::init(const CCPointVector &points, const std::string &filename, b2W
     p2t::CDT cdt(polyline);
 
     /**
-     * STEP 4: Triangulate!
+     * STEP 4: Add hole to the polygon
+     */
+    if (hole.size()) {
+        std::vector<p2t::Point*> holePoly;
+        for (const CCPoint& p : hole)
+            holePoly.push_back(new p2t::Point(p.x, p.y));
+        cdt.AddHole(holePoly);
+    }
+
+    /**
+     * STEP 5: Triangulate!
      */
     cdt.Triangulate();
 
@@ -84,7 +100,7 @@ bool TexPoly::init(const CCPointVector &points, const std::string &filename, b2W
     triangles = cdt.GetTriangles();
 
     /**
-     * STEP 5: create the Box2D body
+     * STEP 6: create the Box2D body
      */
     b2BodyDef bd;
     bd.type = b2_dynamicBody;
@@ -93,7 +109,7 @@ bool TexPoly::init(const CCPointVector &points, const std::string &filename, b2W
     b2Body *body = world->CreateBody(&bd);
 
     /**
-     * STEP 6: Create the fixtures
+     * STEP 7: Create the fixtures
      */
     /// The box2d polygon shape
     b2PolygonShape shape;
@@ -125,7 +141,7 @@ bool TexPoly::init(const CCPointVector &points, const std::string &filename, b2W
     }
 
     /**
-     * STEP 6: Configure the shader program
+     * STEP 8: Configure the shader program
      */
     /// Enable texture repeat
     ccTexParams params = {GL_LINEAR, GL_LINEAR, GL_REPEAT, GL_REPEAT};
@@ -138,7 +154,7 @@ bool TexPoly::init(const CCPointVector &points, const std::string &filename, b2W
     setShaderProgram(program);
 
     /**
-     * STEP 7: cleanup
+     * STEP 9: cleanup
      */
     freeContainer(polyline);
 
