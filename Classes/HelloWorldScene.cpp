@@ -1,5 +1,6 @@
 #include "HelloWorldScene.h"
 #include "texpoly.h"
+#include "B2DebugDrawLayer.h"
 
 #include "clipper.hpp"
 
@@ -77,11 +78,30 @@ bool HelloWorld::init()
 
     /// Create the physics world
     mWorld = new b2World(b2Vec2(0, -10));
+
     /// Initialize the physics
     initPhysics();
 
+    /// Add the box2d debug draw layer
+    /// addChild(B2DebugDrawLayer::create(mWorld, 32),INT_MAX);
+
     scheduleUpdate();
 
+    /*
+    /// Example of a concave polygon with hole
+    int p[] = {80,200,112,120,160,72,256,88,336,120,368,248,352,296,272,312,256,248,192,216,160,232,112,280,64,248};
+    CCPointVector path;
+    for (int i = 0; i < 24; i += 2)
+        path.push_back(ccp(p[i],p[i+1]));
+
+    int h[] = {144,168,192,120,272,136,320,200,288,232,240,168,192,184};
+    CCPointVector hole;
+    for (int i = 0; i < 14; i += 2)
+        hole.push_back(ccp(h[i],h[i+1]));
+
+    /// Create the polygon and add it to the layer
+    addChild(TexPoly::create(path, hole, "pattern.png", mWorld));
+    */
     return true;
 }
 
@@ -145,7 +165,7 @@ CCNode *HelloWorld::createRandomPolygon(int size, std::string filename)
     /// We can safely create the polygon
     TexPoly *poly = TexPoly::create(points, filename, mWorld);
     /// Set a random color. RGBA values must be from 0 to 1
-    poly->setColor(ccc4f(CCRANDOM_0_1(), CCRANDOM_0_1(), CCRANDOM_0_1(), 1.f));
+    /// poly->setColor(ccc4f(CCRANDOM_0_1(), CCRANDOM_0_1(), CCRANDOM_0_1(), 1.f));
 
     return poly;
 }
