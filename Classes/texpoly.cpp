@@ -131,7 +131,7 @@ bool TexPoly::init(const CCPointVector &points, const CCPointVector &hole, const
             /// Populate the vertices position
             mVertexPos.push_back(vertex3(p.x, p.y, .0f));   /// x y z
             /// Populate the texture coordinates
-            mTexCoords.push_back(tex2(p.x / texSize.width, p.y / texSize.height));
+            mTexCoords.push_back(tex2(p.x / texSize.width, 1 - p.y / texSize.height));
         }
         /// Create the fixture
         shape.Set(v, 3);
